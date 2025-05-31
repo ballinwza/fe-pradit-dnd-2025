@@ -16,10 +16,15 @@
         "plugins": [
             {
                 "name": "next"
+            },
+            {
+                "name": "@0no-co/graphqlsp",
+                "schema": "./schema.graphql"
             }
         ],
         "paths": {
-            "@/*": ["./src/*"]
+            "@*": ["./src/*"],
+            "@emotion/styled": ["./node_modules/@emotion/styled/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

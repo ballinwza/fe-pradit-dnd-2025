@@ -7,26 +7,38 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "prepare": "husky"
+        "prepare": "husky",
+        "codegen": "graphql-codegen --config codegen.ts"
     },
     "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@fontsource/roboto": "^5.2.5",
+        "@mui/material": "^7.1.0",
+        "graphql": "^16.11.0",
         "next": "15.3.3",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "zustand": "^5.0.5"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@graphql-codegen/cli": "5.0.6",
+        "@parcel/watcher": "^2.5.1",
         "@tailwindcss/postcss": "^4",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "eslint": "^9",
         "eslint-config-next": "15.3.3",
+        "eslint-plugin-import": "^2.31.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.1.0",
         "prettier": "3.5.3",
         "tailwindcss": "^4",
-        "typescript": "^5"
+        "typescript": "^5.8.3",
+        "@graphql-codegen/introspection": "4.0.3",
+        "@graphql-codegen/client-preset": "4.8.1"
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
