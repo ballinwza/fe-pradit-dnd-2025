@@ -7,13 +7,17 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "prepare": "husky"
+        "prepare": "husky",
+        "codegen": "DOTENV_CONFIG_PATH=./.env graphql-codegen --require dotenv/config --config codegen.yml",
+        "codegen:watch": "DOTENV_CONFIG_PATH=./.env graphql-codegen --require dotenv/config --config codegen.yml --watch"
     },
     "dependencies": {
+        "@apollo/client": "^3.13.8",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
         "@fontsource/roboto": "^5.2.5",
         "@mui/material": "^7.1.0",
+        "graphql": "^16.11.0",
         "next": "15.3.3",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
@@ -21,6 +25,14 @@
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",
+        "@graphql-codegen/cli": "5.0.6",
+        "@graphql-codegen/client-preset": "4.8.1",
+        "@graphql-codegen/introspection": "4.0.3",
+        "@graphql-codegen/typescript": "^4.1.6",
+        "@graphql-codegen/typescript-graphql-request": "^6.3.0",
+        "@graphql-codegen/typescript-operations": "^4.6.1",
+        "@graphql-codegen/typescript-react-apollo": "^4.3.3",
+        "@parcel/watcher": "^2.5.1",
         "@tailwindcss/postcss": "^4",
         "@types/node": "^20",
         "@types/react": "^19",
