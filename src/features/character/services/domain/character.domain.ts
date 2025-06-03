@@ -1,3 +1,5 @@
+import { IUser } from '@features/user/services/domain/user.domain'
+
 export interface ICharacter {
     id: string
     name: string
@@ -5,4 +7,5 @@ export interface ICharacter {
     speed: number
     initiativePoint: number
     hitDice: number
+    user: IUser
 }

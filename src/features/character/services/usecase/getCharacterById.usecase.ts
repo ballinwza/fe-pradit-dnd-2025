@@ -1,24 +1,16 @@
 import { ICharacter } from '../domain/character.domain'
+import { CharacterMapper } from '../mapper/characterMapper'
 import { ICharacterRepository } from '../repositories/character.repository'
 
 export class GetCharacterByIdUsecase {
     constructor(private readonly characterRepository: ICharacterRepository) {}
 
     async handle(): Promise<ICharacter> {
-        const result = await this.characterRepository.getCharacter()
+        const characterRepository =
+            await this.characterRepository.getCharacter()
 
-        if (result === undefined) {
-        }
+        const result = new CharacterMapper().entityToDomain(characterRepository)
 
-        const map: ICharacter = {
-            id: '',
-            name: result?.name ?? '',
-            avatarImage: '',
-            speed: 1,
-            initiativePoint: 1,
-            hitDice: 1,
-        }
-
-        return map
+        return result
     }
 }
