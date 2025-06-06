@@ -34,80 +34,132 @@ export type Scalars = {
 
 export type Character = {
     __typename?: 'Character'
+    avatarImage: Scalars['String']['output']
+    hitDice: Scalars['Int']['output']
+    id: Scalars['String']['output']
+    initiativePoint: Scalars['Int']['output']
     name: Scalars['String']['output']
+    speed: Scalars['Int']['output']
+    user: User
 }
 
 export type Query = {
     __typename?: 'Query'
-    character: Character
-    user: User
+    characterById: Character
+    userById: User
+    userList: Array<User>
+}
+
+export type QueryCharacterByIdArgs = {
+    id: Scalars['String']['input']
+}
+
+export type QueryUserByIdArgs = {
+    id: Scalars['String']['input']
 }
 
 export type User = {
     __typename?: 'User'
+    _id: Scalars['String']['output']
+    displayName: Scalars['String']['output']
     email: Scalars['String']['output']
+    password: Scalars['String']['output']
+    userImage: Scalars['String']['output']
 }
 
-export type GetCharacterQueryVariables = Exact<{ [key: string]: never }>
+export type CharacterByIdQueryVariables = Exact<{
+    id: Scalars['String']['input']
+}>
 
-export type GetCharacterQuery = {
+export type CharacterByIdQuery = {
     __typename?: 'Query'
-    character: { __typename?: 'Character'; name: string }
+    characterById: {
+        __typename?: 'Character'
+        id: string
+        name: string
+        avatarImage: string
+        speed: number
+        initiativePoint: number
+        hitDice: number
+        user: {
+            __typename?: 'User'
+            _id: string
+            email: string
+            displayName: string
+            userImage: string
+        }
+    }
 }
 
-export const GetCharacterDocument = gql`
-    query GetCharacter {
-        character {
+export const CharacterByIdDocument = gql`
+    query CharacterById($id: String!) {
+        characterById(id: $id) {
+            id
+            user {
+                _id
+                email
+                displayName
+                userImage
+            }
             name
+            avatarImage
+            speed
+            initiativePoint
+            hitDice
         }
     }
 `
 
 /**
- * __useGetCharacterQuery__
+ * __useCharacterByIdQuery__
  *
- * To run a query within a React component, call `useGetCharacterQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCharacterByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCharacterQuery({
+ * const { data, loading, error } = useCharacterByIdQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetCharacterQuery(
-    baseOptions?: Apollo.QueryHookOptions<
-        GetCharacterQuery,
-        GetCharacterQueryVariables
-    >,
+export function useCharacterByIdQuery(
+    baseOptions: Apollo.QueryHookOptions<
+        CharacterByIdQuery,
+        CharacterByIdQueryVariables
+    > &
+        (
+            | { variables: CharacterByIdQueryVariables; skip?: boolean }
+            | { skip: boolean }
+        ),
 ) {
     const options = { ...defaultOptions, ...baseOptions }
-    return Apollo.useQuery<GetCharacterQuery, GetCharacterQueryVariables>(
-        GetCharacterDocument,
+    return Apollo.useQuery<CharacterByIdQuery, CharacterByIdQueryVariables>(
+        CharacterByIdDocument,
         options,
     )
 }
-export function useGetCharacterLazyQuery(
+export function useCharacterByIdLazyQuery(
     baseOptions?: Apollo.LazyQueryHookOptions<
-        GetCharacterQuery,
-        GetCharacterQueryVariables
+        CharacterByIdQuery,
+        CharacterByIdQueryVariables
     >,
 ) {
     const options = { ...defaultOptions, ...baseOptions }
-    return Apollo.useLazyQuery<GetCharacterQuery, GetCharacterQueryVariables>(
-        GetCharacterDocument,
+    return Apollo.useLazyQuery<CharacterByIdQuery, CharacterByIdQueryVariables>(
+        CharacterByIdDocument,
         options,
     )
 }
-export function useGetCharacterSuspenseQuery(
+export function useCharacterByIdSuspenseQuery(
     baseOptions?:
         | Apollo.SkipToken
         | Apollo.SuspenseQueryHookOptions<
-              GetCharacterQuery,
-              GetCharacterQueryVariables
+              CharacterByIdQuery,
+              CharacterByIdQueryVariables
           >,
 ) {
     const options =
@@ -115,20 +167,20 @@ export function useGetCharacterSuspenseQuery(
             ? baseOptions
             : { ...defaultOptions, ...baseOptions }
     return Apollo.useSuspenseQuery<
-        GetCharacterQuery,
-        GetCharacterQueryVariables
-    >(GetCharacterDocument, options)
+        CharacterByIdQuery,
+        CharacterByIdQueryVariables
+    >(CharacterByIdDocument, options)
 }
-export type GetCharacterQueryHookResult = ReturnType<
-    typeof useGetCharacterQuery
+export type CharacterByIdQueryHookResult = ReturnType<
+    typeof useCharacterByIdQuery
 >
-export type GetCharacterLazyQueryHookResult = ReturnType<
-    typeof useGetCharacterLazyQuery
+export type CharacterByIdLazyQueryHookResult = ReturnType<
+    typeof useCharacterByIdLazyQuery
 >
-export type GetCharacterSuspenseQueryHookResult = ReturnType<
-    typeof useGetCharacterSuspenseQuery
+export type CharacterByIdSuspenseQueryHookResult = ReturnType<
+    typeof useCharacterByIdSuspenseQuery
 >
-export type GetCharacterQueryResult = Apollo.QueryResult<
-    GetCharacterQuery,
-    GetCharacterQueryVariables
+export type CharacterByIdQueryResult = Apollo.QueryResult<
+    CharacterByIdQuery,
+    CharacterByIdQueryVariables
 >

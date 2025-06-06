@@ -1,5 +1,16 @@
-query GetCharacter {
-    character {
+query CharacterById($id: String!) {
+    characterById(id: $id) {
+        id
+        user {
+            _id
+            email
+            displayName
+            userImage
+        }
         name
+        avatarImage
+        speed
+        initiativePoint
+        hitDice
     }
 }

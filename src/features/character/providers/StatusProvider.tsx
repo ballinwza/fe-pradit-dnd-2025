@@ -1,7 +1,6 @@
 'use client'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import StatusCard from '../components/StatusCard'
-import { useCharacterStore } from '../stores/chracter.store'
 
 const mockStatus = [
     {
@@ -42,15 +41,8 @@ const mockStatus = [
     },
 ]
 const StatusProvider: FC = () => {
-    const { fetchCharacter, character } = useCharacterStore((state) => state)
-
-    useEffect(() => {
-        fetchCharacter()
-    }, [])
-
     return (
         <div className="bg-grey flex flex-row gap-4">
-            {character && character.name}
             {mockStatus &&
                 mockStatus.map(({ short, value, indicaterNumber }, index) => {
                     return (
