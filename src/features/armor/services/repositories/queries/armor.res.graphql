@@ -1,0 +1,22 @@
+query ArmorListResponse {
+    armorList {
+        id
+        armorType
+        name
+        armorClass
+        maximumPlusArmorClass
+        stealthAdvantageType
+        price {
+            name
+            shortType
+            value
+        }
+        strRequirement
+        descriptionEn
+        weight {
+            value
+            unit
+        }
+        imageUrl
+    }
+}

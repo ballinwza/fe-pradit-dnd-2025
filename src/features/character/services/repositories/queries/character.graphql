@@ -2,7 +2,7 @@ query CharacterById($id: String!) {
     characterById(id: $id) {
         id
         user {
-            _id
+            id
             email
             displayName
             userImage

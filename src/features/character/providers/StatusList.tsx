@@ -40,7 +40,7 @@ const mockStatus = [
         indicaterNumber: 1,
     },
 ]
-const StatusProvider: FC = () => {
+const StatusList: FC = () => {
     return (
         <div className="bg-grey flex flex-row gap-4">
             {mockStatus &&
@@ -58,4 +58,4 @@ const StatusProvider: FC = () => {
     )
 }
 
-export default StatusProvider
+export default StatusList

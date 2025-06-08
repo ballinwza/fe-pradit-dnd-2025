@@ -1,13 +1,12 @@
 'use client'
 import { FC, useEffect } from 'react'
-import StatusCard from '../components/StatusCard'
 import { useCharacterStore } from '../stores/chracter.store'
-import ArmorClassCard from '../components/ArmorClassCard'
-import ExpProvider from './ExpProvider'
-import HpProvider from './HpProvider'
-import TempProvider from './TempProvider'
-import StatusProvider from './StatusProvider'
+
+import StatusList from './StatusList'
 import Image from 'next/image'
+import { Button } from '@mui/material'
+import Link from 'next/link'
+import CustomProgressBar from '../components/CustomProgressBar'
 
 const CharacterProvider: FC = () => {
     const { fetchCharacter, character } = useCharacterStore((state) => state)
@@ -36,20 +35,23 @@ const CharacterProvider: FC = () => {
             <div>Initiative Point: {character?.initiativePoint}</div>
             <div>Speed : {character?.speed}</div>
             <div>Hit Dice : {character?.hitDice}</div>
+
             <div>
-                <ArmorClassCard point={14} />
+                EXP : <CustomProgressBar current={100} maximum={300} />
             </div>
             <div>
-                <ExpProvider />
+                HP : <CustomProgressBar current={50} maximum={100} />
             </div>
             <div>
-                <HpProvider />
-            </div>
-            <div>
-                <TempProvider />
+                Temp : <CustomProgressBar current={10} maximum={10} />
             </div>
 
-            <StatusProvider />
+            <div>
+                <Link href="/armor">
+                    <Button>Armor Shop</Button>
+                </Link>
+            </div>
+            <StatusList />
         </div>
     )
 }

@@ -16,7 +16,6 @@ export const useCharacterStore = create<CharacterState>((set) => ({
 
         const result = await usecase.handle()
 
-        console.log(result)
         set(() => ({
             character: result,
         }))
