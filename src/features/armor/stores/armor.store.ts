@@ -25,13 +25,13 @@ export const useArmorStore = create<ArmorState>((set) => ({
         const result = await usecase.handle()
 
         const light = result.filter(
-            (armor) => armor.armorType === IArmorType.light,
+            (armor) => armor.armorType === IArmorType.LIGHT,
         )
         const medium = result.filter(
-            (armor) => armor.armorType === IArmorType.medium,
+            (armor) => armor.armorType === IArmorType.MEDIUM,
         )
         const heacy = result.filter(
-            (armor) => armor.armorType === IArmorType.heavy,
+            (armor) => armor.armorType === IArmorType.HEAVY,
         )
 
         set(() => ({

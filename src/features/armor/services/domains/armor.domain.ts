@@ -17,8 +17,8 @@ export interface IArmor {
 }
 
 export enum IArmorType {
-    light = 'LIGHT',
-    medium = 'MEDIUM',
-    heavy = 'HEAVY',
-    shield = 'SHIELD',
+    LIGHT = 'LIGHT',
+    MEDIUM = 'MEDIUM',
+    HEAVY = 'HEAVY',
+    SHIELD = 'SHIELD',
 }

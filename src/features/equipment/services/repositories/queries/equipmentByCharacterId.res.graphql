@@ -1,0 +1,93 @@
+query EquipmentByCharacterIdResponse($characterId: String!) {
+    equipmentByCharacterId(characterId: $characterId) {
+        characterId
+        armor {
+            id
+            armorType
+            name
+            armorClass
+            maximumPlusArmorClass
+            stealthAdvantageType
+            price {
+                name
+                shortType
+                value
+            }
+            strRequirement
+            descriptionEn
+            weight {
+                value
+                unit
+            }
+            imageUrl
+        }
+        rightHanded {
+            name
+            descriptionTh
+            descriptionEn
+            diceQuantity
+            diceRollType
+            damagedType
+            weight {
+                value
+                unit
+            }
+            price {
+                name
+                shortType
+                value
+            }
+            weaponMastery {
+                id
+                name
+                descriptionEn
+                descriptionTh
+                imageUrl
+            }
+            weaponProperty {
+                id
+                name
+                descriptionEn
+                descriptionTh
+                imageUrl
+            }
+            imageUrl
+            normalRange
+            longRange
+        }
+        leftHanded {
+            name
+            descriptionTh
+            descriptionEn
+            diceQuantity
+            diceRollType
+            damagedType
+            weight {
+                value
+                unit
+            }
+            price {
+                name
+                shortType
+                value
+            }
+            weaponMastery {
+                id
+                name
+                descriptionEn
+                descriptionTh
+                imageUrl
+            }
+            weaponProperty {
+                id
+                name
+                descriptionEn
+                descriptionTh
+                imageUrl
+            }
+            imageUrl
+            normalRange
+            longRange
+        }
+    }
+}

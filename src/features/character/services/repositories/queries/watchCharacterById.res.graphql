@@ -1,0 +1,48 @@
+subscription WatchCharacterByIdResponse($id: String!) {
+    watchCharacterById(id: $id) {
+        id
+        name
+        avatarImage
+        classId
+        hitPoint {
+            maxHp
+            currrentHp
+            temporaryHp
+            maxTemporaryHp
+        }
+        currentExp
+        pocketMoney {
+            name
+            shortType
+            value
+        }
+        proficiency {
+            athletics
+            arobatics
+            sleight_of_hand
+            stealth
+            arcana
+            history
+            investigation
+            nature
+            religion
+            animal_handling
+            insight
+            medicine
+            perception
+            survival
+            deception
+            intimidation
+            performance
+            persuasion
+        }
+        ability {
+            strength
+            dexterity
+            constitution
+            intelligence
+            wisdom
+            charisma
+        }
+    }
+}

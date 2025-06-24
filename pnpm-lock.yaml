@@ -22,18 +22,30 @@ importers:
             '@mui/material':
                 specifier: ^7.1.0
                 version: 7.1.0(@emotion/react@11.14.0(@types/react@19.1.6)(react@19.1.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.1.6)(react@19.1.0))(@types/react@19.1.6)(react@19.1.0))(@types/react@19.1.6)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+            builder-pattern:
+                specifier: ^2.2.0
+                version: 2.2.0
             graphql:
                 specifier: ^16.11.0
                 version: 16.11.0
+            graphql-ws:
+                specifier: ^6.0.5
+                version: 6.0.5(graphql@16.11.0)(ws@8.18.2)
             next:
                 specifier: 15.3.3
                 version: 15.3.3(@babel/core@7.27.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+            radash:
+                specifier: ^12.1.0
+                version: 12.1.0
             react:
                 specifier: ^19.0.0
                 version: 19.1.0
             react-dom:
                 specifier: ^19.0.0
                 version: 19.1.0(react@19.1.0)
+            rxjs:
+                specifier: ^7.8.2
+                version: 7.8.2
             zustand:
                 specifier: ^5.0.5
                 version: 5.0.5(@types/react@19.1.6)(react@19.1.0)
@@ -2600,6 +2612,12 @@ packages:
                 integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==,
             }
 
+    builder-pattern@2.2.0:
+        resolution:
+            {
+                integrity: sha512-cES3qdeBzA4QyJi7rV/l/kAhIFX6AKo3vK66ZPXLNpjcQWCS8sjLKscly8imlfW2YPTo/hquMRMnaWpZ80Kj+g==,
+            }
+
     busboy@1.6.0:
         resolution:
             {
@@ -5081,6 +5099,13 @@ packages:
             {
                 integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==,
             }
+
+    radash@12.1.0:
+        resolution:
+            {
+                integrity: sha512-b0Zcf09AhqKS83btmUeYBS8tFK7XL2e3RvLmZcm0sTdF1/UUlHSsjXdCcWNxe7yfmAlPve5ym0DmKGtTzP6kVQ==,
+            }
+        engines: { node: '>=14.18.0' }
 
     react-dom@19.1.0:
         resolution:
@@ -8066,6 +8091,8 @@ snapshots:
             base64-js: 1.5.1
             ieee754: 1.2.1
 
+    builder-pattern@2.2.0: {}
+
     busboy@1.6.0:
         dependencies:
             streamsearch: 1.1.0
@@ -9671,6 +9698,8 @@ snapshots:
     punycode@2.3.1: {}
 
     queue-microtask@1.2.3: {}
+
+    radash@12.1.0: {}
 
     react-dom@19.1.0(react@19.1.0):
         dependencies:
