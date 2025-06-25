@@ -1,23 +1,50 @@
 import { create } from 'zustand'
 import { ICharacter } from '../services/domain/character.domain'
-import { CharacterRepository } from '../services/repositories/character.repository'
-import { GetCharacterByIdUsecase } from '../services/usecase/getCharacterById.usecase'
+
+import { getCharacterByIdUsecaseAsNewClass } from '../services/usecase/getCharacterById.usecase'
+import { IClass } from '@features/class/services/domains/class.domain'
 
 interface CharacterState {
+    characterLoading: boolean
+    setCharacterLoading: (characterLoading: boolean) => void
     character: ICharacter | null
-    fetchCharacter: () => void
+    setCharacter: (chracter: ICharacter) => void
+    fetchCharacter: (characterId: string) => void
+    characterClass: IClass | null
+    setCharacterClass: (classItem: IClass) => void
 }
 
-export const useCharacterStore = create<CharacterState>((set) => ({
+export const useCharacterStore = create<CharacterState>((set, get) => ({
+    characterLoading: false,
+    setCharacterLoading: async (characterLoading: boolean) =>
+        set(() => ({ characterLoading })),
     character: null,
-    fetchCharacter: async () => {
-        const repo = new CharacterRepository()
-        const usecase = new GetCharacterByIdUsecase(repo)
-
-        const result = await usecase.handle()
-
+    setCharacter: async (character: ICharacter) => {
         set(() => ({
-            character: result,
+            character,
+        }))
+    },
+    fetchCharacter: async (characterId: string) => {
+        try {
+            get().setCharacterLoading(true)
+            const result =
+                await getCharacterByIdUsecaseAsNewClass.handle(characterId)
+
+            set(() => ({
+                character: result,
+            }))
+        } catch (error) {
+            console.error('useCharacterStore Error : ', error)
+        } finally {
+            get().setCharacterLoading(false)
+        }
+    },
+    characterClass: null,
+    setCharacterClass: (classItem: IClass) => {
+        set(() => ({
+            characterClass: {
+                ...classItem,
+            },
         }))
     },
 }))

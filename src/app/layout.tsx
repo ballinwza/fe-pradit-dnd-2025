@@ -6,7 +6,8 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
-import MainLayout from '@core/layout/components/MainLayout'
+import MainLayout from '@features/core/components/layouts/MainLayout'
+import { ApolloWrapper } from '@lib/ApolloWrapper'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -33,7 +34,9 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <MainLayout>{children}</MainLayout>
+                <ApolloWrapper>
+                    <MainLayout>{children}</MainLayout>
+                </ApolloWrapper>
             </body>
         </html>
     )

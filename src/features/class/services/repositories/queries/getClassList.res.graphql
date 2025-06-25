@@ -1,0 +1,9 @@
+query GetClassListResponse {
+    classList {
+        id
+        name
+        descriptionEn
+        descriptionTh
+        diceHpIncrease
+    }
+}

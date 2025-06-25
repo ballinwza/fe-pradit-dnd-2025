@@ -1,16 +1,26 @@
 import { ICharacter } from '../domain/character.domain'
-import { CharacterMapper } from '../mapper/characterMapper'
-import { ICharacterRepository } from '../repositories/character.repository'
 
-export class GetCharacterByIdUsecase {
-    constructor(private readonly characterRepository: ICharacterRepository) {}
+import {
+    CharacterRepository,
+    ICharacterRepository,
+} from '../repositories/character.repository'
+import { characterMapper } from '../mapper/characterMapper'
 
-    async handle(): Promise<ICharacter> {
+class GetCharacterByIdUsecase {
+    private characterRepository: ICharacterRepository
+
+    constructor() {
+        this.characterRepository = new CharacterRepository()
+    }
+
+    public async handle(characterId: string): Promise<ICharacter> {
         const characterRepository =
-            await this.characterRepository.getCharacter()
+            await this.characterRepository.getCharacter(characterId)
 
-        const result = new CharacterMapper().entityToDomain(characterRepository)
+        const result = characterMapper.entityToDomain(characterRepository)
 
         return result
     }
 }
+
+export const getCharacterByIdUsecaseAsNewClass = new GetCharacterByIdUsecase()

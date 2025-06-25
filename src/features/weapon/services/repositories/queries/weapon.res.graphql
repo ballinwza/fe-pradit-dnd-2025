@@ -1,0 +1,37 @@
+query WeaponListResponse {
+    weaponList {
+        id
+        name
+        diceQuantity
+        descriptionEn
+        descriptionTh
+        diceRollType
+        damagedType
+        imageUrl
+        normalRange
+        longRange
+        weight {
+            value
+            unit
+        }
+        price {
+            name
+            shortType
+            value
+        }
+        weaponMastery {
+            id
+            name
+            descriptionEn
+            descriptionTh
+            imageUrl
+        }
+        weaponProperty {
+            id
+            name
+            descriptionEn
+            descriptionTh
+            imageUrl
+        }
+    }
+}

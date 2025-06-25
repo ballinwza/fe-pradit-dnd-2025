@@ -27,13 +27,13 @@ export class ArmorMapper {
     public armorTypeEntityToDommain(entity: ArmorType): IArmorType {
         switch (entity) {
             case ArmorType.Light:
-                return IArmorType.light
+                return IArmorType.LIGHT
             case ArmorType.Medium:
-                return IArmorType.medium
+                return IArmorType.MEDIUM
             case ArmorType.Heavy:
-                return IArmorType.heavy
+                return IArmorType.HEAVY
             case ArmorType.Shield:
-                return IArmorType.shield
+                return IArmorType.SHIELD
         }
     }
 }

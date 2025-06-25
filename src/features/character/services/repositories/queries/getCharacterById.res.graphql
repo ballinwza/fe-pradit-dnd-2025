@@ -1,0 +1,30 @@
+query GetCharacterByIdResponse($id: String!) {
+    characterById(id: $id) {
+        id
+        name
+        avatarImage
+        classId
+        hitPoint {
+            maxHp
+            currrentHp
+            temporaryHp
+            maxTemporaryHp
+        }
+        currentExp
+        pocketMoney {
+            name
+            shortType
+            value
+        }
+        proficiency {
+            name
+            value
+            abilityShortTypeGroup
+        }
+        ability {
+            name
+            value
+            shortType
+        }
+    }
+}
