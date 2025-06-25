@@ -1,7 +1,7 @@
 import { Class } from '@graphql/generated/graphql'
 import { IClass } from '../domains/class.domain'
 
-export class ClassMapper {
+class ClassMapper {
     public classEntityToDomain(entity: Class): IClass {
         return {
             id: entity.id,
@@ -12,3 +12,5 @@ export class ClassMapper {
         }
     }
 }
+
+export const newClassMapper = new ClassMapper()

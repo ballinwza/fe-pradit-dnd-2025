@@ -1,13 +1,8 @@
+import { IAbilityShortType } from '@features/core/services/domains/ability.domain'
 import { ICoin } from '@features/core/services/domains/coin.domain'
+import { IProficiencyType } from '@features/core/services/domains/proficiency.domain'
+import { Class } from '@graphql/generated/graphql'
 
-export interface ICharacterWithClass extends ICharacter {
-    class: {
-        id: string
-        name: string
-        descriptionEn: string
-        descriptionTh: string
-    }
-}
 export interface ICharacter {
     id: string
     name: string
@@ -15,8 +10,8 @@ export interface ICharacter {
     currentExp: number
     avatarImage: string
     pocketMoney: ICoin[]
-    proficiency: IProficiency
-    ability: IAbility
+    proficiency: IProficiency[]
+    ability: IAbility[]
     classId: string
     // speed: number
     // initiativePoint: number
@@ -31,33 +26,12 @@ export interface IHitPoint {
     maxTemporaryHp: number
 }
 export interface IProficiency {
-    athletics: number
-    arobatics: number
-    sleightOfHand: number
-    stealth: number
-    arcana: number
-    history: number
-    investigation: number
-    nature: number
-    religion: number
-    animalHandling: number
-    insight: number
-    medicine: number
-    perception: number
-    survival: number
-    deception: number
-    intimidation: number
-    performance: number
-    persuasion: number
+    name: IProficiencyType
+    value: number
+    short: IAbilityShortType
 }
 export interface IAbility {
-    strength: number
-    dexterity: number
-    constitution: number
-    intelligence: number
-    wisdom: number
-    charisma: number
-    // [key: string]: number
+    name: string
+    value: number
+    short: IAbilityShortType
 }
-
-type T = Record<string, number>

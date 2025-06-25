@@ -17,32 +17,14 @@ query GetCharacterByIdResponse($id: String!) {
             value
         }
         proficiency {
-            athletics
-            arobatics
-            sleight_of_hand
-            stealth
-            arcana
-            history
-            investigation
-            nature
-            religion
-            animal_handling
-            insight
-            medicine
-            perception
-            survival
-            deception
-            intimidation
-            performance
-            persuasion
+            name
+            value
+            abilityShortTypeGroup
         }
         ability {
-            strength
-            dexterity
-            constitution
-            intelligence
-            wisdom
-            charisma
+            name
+            value
+            shortType
         }
     }
 }

@@ -1,8 +1,8 @@
 import {
-    Ability,
     Character,
+    CharacterAbility,
     HitPoint,
-    Proficiency,
+    CharacterProficiency,
 } from '@graphql/generated/graphql'
 import {
     IAbility,
@@ -11,6 +11,8 @@ import {
     IProficiency,
 } from '../domain/character.domain'
 import { CoinMapper } from '@features/core/services/mappers/coin.mapper'
+import { newAbilityMapper } from '@features/core/services/mappers/ability.mapper'
+import { newProficiencyMapper } from '@features/core/services/mappers/proficiency.mapper'
 
 class CharacterMapper {
     private coinMapper: CoinMapper
@@ -29,8 +31,12 @@ class CharacterMapper {
             pocketMoney: entity.pocketMoney.map((price) =>
                 this.coinMapper.coinEntityToDomain(price),
             ),
-            proficiency: this.proficiencyEntityToDomain(entity.proficiency),
-            ability: this.abilityEntityToDomain(entity.ability),
+            proficiency: entity.proficiency.map((item) =>
+                this.proficiencyEntityToDomain(item),
+            ),
+            ability: entity.ability.map((item) =>
+                this.abilityEntityToDomain(item),
+            ),
             classId: entity.classId,
             // speed: entity.speed,
             // initiativePoint: entity.initiativePoint,
@@ -49,36 +55,26 @@ class CharacterMapper {
             maxTemporaryHp: entity.maxTemporaryHp,
         }
     }
-    public abilityEntityToDomain(entity: Ability): IAbility {
+    public abilityEntityToDomain(entity: CharacterAbility): IAbility {
         return {
-            strength: entity.strength,
-            dexterity: entity.dexterity,
-            constitution: entity.constitution,
-            intelligence: entity.intelligence,
-            wisdom: entity.wisdom,
-            charisma: entity.charisma,
+            name: entity.name,
+            value: entity.value,
+            short: newAbilityMapper.abilityShortTypeEntityToDomain(
+                entity.shortType,
+            ),
         }
     }
-    public proficiencyEntityToDomain(entity: Proficiency): IProficiency {
+    public proficiencyEntityToDomain(
+        entity: CharacterProficiency,
+    ): IProficiency {
         return {
-            athletics: entity.athletics,
-            arobatics: entity.arobatics,
-            sleightOfHand: entity.sleight_of_hand,
-            stealth: entity.stealth,
-            arcana: entity.arcana,
-            history: entity.history,
-            investigation: entity.investigation,
-            nature: entity.nature,
-            religion: entity.religion,
-            animalHandling: entity.animal_handling,
-            insight: entity.insight,
-            medicine: entity.medicine,
-            perception: entity.perception,
-            survival: entity.survival,
-            deception: entity.deception,
-            intimidation: entity.intimidation,
-            performance: entity.performance,
-            persuasion: entity.persuasion,
+            name: newProficiencyMapper.proficiencyTypeEntityToDomain(
+                entity.name,
+            ),
+            value: entity.value,
+            short: newAbilityMapper.abilityShortTypeEntityToDomain(
+                entity.abilityShortTypeGroup,
+            ),
         }
     }
 }

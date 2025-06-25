@@ -1,23 +1,23 @@
 import { create } from 'zustand'
 import { IClass } from '../services/domains/class.domain'
-import { ClassRepository } from '../services/repositories/class.repository'
-import { GetClassListUsecase } from '../services/usecases/getClassList.usecase'
+import { getClassLiseUsecaseAsNewClass } from '../services/usecases/getClassList.usecase'
+
+import { isEmpty } from 'radash'
 
 interface ClassState {
     classList: IClass[] | null
     fetchClassList: () => void
 }
 
-const classRepository = new ClassRepository()
-const getClassListUsecase = new GetClassListUsecase(classRepository)
-
-export const useClassStore = create<ClassState>((set) => ({
+export const useClassStore = create<ClassState>((set, get) => ({
     classList: null,
     fetchClassList: async () => {
-        const classList = await getClassListUsecase.handle()
+        const classList = await getClassLiseUsecaseAsNewClass.handle()
 
-        set(() => ({
-            classList,
-        }))
+        if (!isEmpty(classList)) {
+            set(() => ({
+                classList,
+            }))
+        }
     },
 }))

@@ -5,7 +5,7 @@ interface Props {
     value: number
 }
 
-const StatusCard: FC<Props> = ({ short, value }: Props) => {
+const AbilityCard: FC<Props> = ({ short, value }: Props) => {
     const calculateIndicatrt = (indicaterPoint: number): string => {
         const calculation: number = Math.round((indicaterPoint - 10) / 2)
 
@@ -32,4 +32,4 @@ const StatusCard: FC<Props> = ({ short, value }: Props) => {
     )
 }
 
-export default StatusCard
+export default AbilityCard

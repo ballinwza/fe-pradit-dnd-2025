@@ -1,45 +1,50 @@
 import { create } from 'zustand'
-import {
-    ICharacter,
-    ICharacterWithClass,
-} from '../services/domain/character.domain'
-import { Character } from '@graphql/generated/graphql'
+import { ICharacter } from '../services/domain/character.domain'
 
-import { getCharacterByIdUsecase } from '../services/usecase/getCharacterById.usecase'
-import { characterMapper } from '../services/mapper/characterMapper'
+import { getCharacterByIdUsecaseAsNewClass } from '../services/usecase/getCharacterById.usecase'
+import { IClass } from '@features/class/services/domains/class.domain'
 
 interface CharacterState {
+    characterLoading: boolean
+    setCharacterLoading: (characterLoading: boolean) => void
     character: ICharacter | null
-    setCharacter: (chracter: Character) => void
-    characterWithClassDetail: ICharacterWithClass | null
-    setCharacterWithClassDetail: (chracter: ICharacterWithClass) => void
+    setCharacter: (chracter: ICharacter) => void
     fetchCharacter: (characterId: string) => void
+    characterClass: IClass | null
+    setCharacterClass: (classItem: IClass) => void
 }
 
-export const useCharacterStore = create<CharacterState>((set) => ({
+export const useCharacterStore = create<CharacterState>((set, get) => ({
+    characterLoading: false,
+    setCharacterLoading: async (characterLoading: boolean) =>
+        set(() => ({ characterLoading })),
     character: null,
-    characterWithClassDetail: null,
-    fetchCharacter: async (characterId: string) => {
-        const result = await getCharacterByIdUsecase.handle(characterId)
-
+    setCharacter: async (character: ICharacter) => {
         set(() => ({
-            character: result,
+            character,
         }))
     },
-    setCharacter: async (chracter: Character) => {
-        const afterMapper = characterMapper.entityToDomain(chracter)
-        const hasChanged =
-            JSON.stringify(afterMapper) !== JSON.stringify(chracter)
+    fetchCharacter: async (characterId: string) => {
+        try {
+            get().setCharacterLoading(true)
+            const result =
+                await getCharacterByIdUsecaseAsNewClass.handle(characterId)
 
-        if (hasChanged) {
             set(() => ({
-                character: afterMapper,
+                character: result,
             }))
+        } catch (error) {
+            console.error('useCharacterStore Error : ', error)
+        } finally {
+            get().setCharacterLoading(false)
         }
     },
-    setCharacterWithClassDetail: async (chracter: ICharacterWithClass) => {
+    characterClass: null,
+    setCharacterClass: (classItem: IClass) => {
         set(() => ({
-            characterWithClassDetail: chracter,
+            characterClass: {
+                ...classItem,
+            },
         }))
     },
 }))
