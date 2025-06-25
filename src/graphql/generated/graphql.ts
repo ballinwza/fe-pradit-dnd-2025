@@ -32,16 +32,6 @@ export type Scalars = {
     Float: { input: number; output: number }
 }
 
-export type Ability = {
-    __typename?: 'Ability'
-    charisma: Scalars['Int']['output']
-    constitution: Scalars['Int']['output']
-    dexterity: Scalars['Int']['output']
-    intelligence: Scalars['Int']['output']
-    strength: Scalars['Int']['output']
-    wisdom: Scalars['Int']['output']
-}
-
 export type AbilityDetail = {
     __typename?: 'AbilityDetail'
     description_en: Scalars['String']['output']
@@ -91,7 +81,7 @@ export enum ArmorType {
 
 export type Character = {
     __typename?: 'Character'
-    ability: Ability
+    ability: Array<CharacterAbility>
     avatarImage: Scalars['String']['output']
     classId: Scalars['String']['output']
     currentExp: Scalars['Int']['output']
@@ -99,7 +89,21 @@ export type Character = {
     id: Scalars['String']['output']
     name: Scalars['String']['output']
     pocketMoney: Array<Coin>
-    proficiency: Proficiency
+    proficiency: Array<CharacterProficiency>
+}
+
+export type CharacterAbility = {
+    __typename?: 'CharacterAbility'
+    name: Scalars['String']['output']
+    shortType: AbilityShortType
+    value: Scalars['Int']['output']
+}
+
+export type CharacterProficiency = {
+    __typename?: 'CharacterProficiency'
+    abilityShortTypeGroup: AbilityShortType
+    name: ProficiencyType
+    value: Scalars['Int']['output']
 }
 
 export type Class = {
@@ -158,33 +162,32 @@ export type HitPoint = {
     temporaryHp: Scalars['Int']['output']
 }
 
-export type Proficiency = {
-    __typename?: 'Proficiency'
-    animal_handling: Scalars['Int']['output']
-    arcana: Scalars['Int']['output']
-    arobatics: Scalars['Int']['output']
-    athletics: Scalars['Int']['output']
-    deception: Scalars['Int']['output']
-    history: Scalars['Int']['output']
-    insight: Scalars['Int']['output']
-    intimidation: Scalars['Int']['output']
-    investigation: Scalars['Int']['output']
-    medicine: Scalars['Int']['output']
-    nature: Scalars['Int']['output']
-    perception: Scalars['Int']['output']
-    performance: Scalars['Int']['output']
-    persuasion: Scalars['Int']['output']
-    religion: Scalars['Int']['output']
-    sleight_of_hand: Scalars['Int']['output']
-    stealth: Scalars['Int']['output']
-    survival: Scalars['Int']['output']
-}
-
 export type ProficiencyDetail = {
     __typename?: 'ProficiencyDetail'
     description_en: Scalars['String']['output']
     description_th: Scalars['String']['output']
     name: Scalars['String']['output']
+}
+
+export enum ProficiencyType {
+    Animalhandling = 'ANIMALHANDLING',
+    Arcana = 'ARCANA',
+    Arobatics = 'AROBATICS',
+    Athletics = 'ATHLETICS',
+    Deception = 'DECEPTION',
+    History = 'HISTORY',
+    Insight = 'INSIGHT',
+    Intimidation = 'INTIMIDATION',
+    Investigation = 'INVESTIGATION',
+    Medicine = 'MEDICINE',
+    Nature = 'NATURE',
+    Perception = 'PERCEPTION',
+    Performance = 'PERFORMANCE',
+    Persuasion = 'PERSUASION',
+    Religion = 'RELIGION',
+    Sleightofhand = 'SLEIGHTOFHAND',
+    Stealth = 'STEALTH',
+    Survival = 'SURVIVAL',
 }
 
 export type Query = {
@@ -361,36 +364,18 @@ export type GetCharacterByIdResponseQuery = {
             shortType: CoinShortType
             value: number
         }>
-        proficiency: {
-            __typename?: 'Proficiency'
-            athletics: number
-            arobatics: number
-            sleight_of_hand: number
-            stealth: number
-            arcana: number
-            history: number
-            investigation: number
-            nature: number
-            religion: number
-            animal_handling: number
-            insight: number
-            medicine: number
-            perception: number
-            survival: number
-            deception: number
-            intimidation: number
-            performance: number
-            persuasion: number
-        }
-        ability: {
-            __typename?: 'Ability'
-            strength: number
-            dexterity: number
-            constitution: number
-            intelligence: number
-            wisdom: number
-            charisma: number
-        }
+        proficiency: Array<{
+            __typename?: 'CharacterProficiency'
+            name: ProficiencyType
+            value: number
+            abilityShortTypeGroup: AbilityShortType
+        }>
+        ability: Array<{
+            __typename?: 'CharacterAbility'
+            name: string
+            value: number
+            shortType: AbilityShortType
+        }>
     }
 }
 
@@ -420,36 +405,18 @@ export type WatchCharacterByIdResponseSubscription = {
             shortType: CoinShortType
             value: number
         }>
-        proficiency: {
-            __typename?: 'Proficiency'
-            athletics: number
-            arobatics: number
-            sleight_of_hand: number
-            stealth: number
-            arcana: number
-            history: number
-            investigation: number
-            nature: number
-            religion: number
-            animal_handling: number
-            insight: number
-            medicine: number
-            perception: number
-            survival: number
-            deception: number
-            intimidation: number
-            performance: number
-            persuasion: number
-        }
-        ability: {
-            __typename?: 'Ability'
-            strength: number
-            dexterity: number
-            constitution: number
-            intelligence: number
-            wisdom: number
-            charisma: number
-        }
+        proficiency: Array<{
+            __typename?: 'CharacterProficiency'
+            name: ProficiencyType
+            value: number
+            abilityShortTypeGroup: AbilityShortType
+        }>
+        ability: Array<{
+            __typename?: 'CharacterAbility'
+            name: string
+            value: number
+            shortType: AbilityShortType
+        }>
     }
 }
 
@@ -827,32 +794,14 @@ export const GetCharacterByIdResponseDocument = gql`
                 value
             }
             proficiency {
-                athletics
-                arobatics
-                sleight_of_hand
-                stealth
-                arcana
-                history
-                investigation
-                nature
-                religion
-                animal_handling
-                insight
-                medicine
-                perception
-                survival
-                deception
-                intimidation
-                performance
-                persuasion
+                name
+                value
+                abilityShortTypeGroup
             }
             ability {
-                strength
-                dexterity
-                constitution
-                intelligence
-                wisdom
-                charisma
+                name
+                value
+                shortType
             }
         }
     }
@@ -955,32 +904,14 @@ export const WatchCharacterByIdResponseDocument = gql`
                 value
             }
             proficiency {
-                athletics
-                arobatics
-                sleight_of_hand
-                stealth
-                arcana
-                history
-                investigation
-                nature
-                religion
-                animal_handling
-                insight
-                medicine
-                perception
-                survival
-                deception
-                intimidation
-                performance
-                persuasion
+                name
+                value
+                abilityShortTypeGroup
             }
             ability {
-                strength
-                dexterity
-                constitution
-                intelligence
-                wisdom
-                charisma
+                name
+                value
+                shortType
             }
         }
     }
